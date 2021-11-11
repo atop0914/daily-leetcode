@@ -67,9 +67,4 @@ func substr(input string, start int, length int) string {
 	return string(asRunes[start : start+length])
 }
 
-// func main() {
-// 	s := restoreIpAddresses("0000")
-// 	fmt.Println(s)
-// }
-
 // @lc code=end

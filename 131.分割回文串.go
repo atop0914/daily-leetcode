@@ -55,8 +55,3 @@ func reverse(x string) string {
 }
 
 // @lc code=end
-
-// func main() {
-// 	res := partition("cbbbcc")
-// 	fmt.Printf("%v", res)
-// }

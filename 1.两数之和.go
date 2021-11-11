@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
  * @lc app=leetcode.cn id=1 lang=golang
  *
@@ -29,7 +25,3 @@ func twoSum(nums []int, target int) []int {
 }
 
 // @lc code=end
-
-func main() {
-	fmt.Println(twoSum([]int{9, 2, 3, 11, 1, 2, 3, 4, 5}, 6))
-}
