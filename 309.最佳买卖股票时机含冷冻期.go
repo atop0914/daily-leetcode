@@ -11,7 +11,7 @@ import (
  */
 
 // @lc code=start
-func maxProfit(prices []int) int {
+func maxProfit_309(prices []int) int {
 
 	// dp[i][0] 表示第i天没有未持有股票的最大收益
 	// dp[i][1] 表示第i天持有股票的最大收益

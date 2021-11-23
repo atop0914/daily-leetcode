@@ -82,7 +82,7 @@ func maxProfit_121(prices []int) int {
 }
 */
 
-func maxProfit(prices []int) int {
+func maxProfit_122(prices []int) int {
 	maxProfit := 0
 
 	// 看了评论才会的 当天卖出 当天买入 利润为0 核心思想就是只要第二天的价格大于第一天的就卖出 获利递增

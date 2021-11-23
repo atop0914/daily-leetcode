@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
  * @lc app=leetcode.cn id=45 lang=golang
  *
@@ -47,6 +45,6 @@ func max_45(a, b int) int {
 
 // @lc code=end
 
-func main() {
-	fmt.Println(jump([]int{2, 3, 1, 4, 1}))
-}
+// func main() {
+// 	fmt.Println(jump([]int{2, 3, 1, 4, 1}))
+// }

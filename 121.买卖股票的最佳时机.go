@@ -7,7 +7,7 @@ package main
  */
 
 // @lc code=start
-func maxProfit(prices []int) int {
+func maxProfit_121(prices []int) int {
 	maxProfit, minCost, days := 0, prices[0], len(prices)
 
 	for i := 1; i < days; i++ {
