@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -48,7 +47,3 @@ func min_931(a, b int) int {
 }
 
 // @lc code=end
-
-func main() {
-	fmt.Println(minFallingPathSum([][]int{{2, 1, 3}, {6, 5, 4}, {7, 8, 9}}))
-}
