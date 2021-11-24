@@ -13,37 +13,27 @@ import (
 
 // @lc code=start
 func minFallingPathSum(matrix [][]int) int {
+	min, length := math.MaxInt32, len(matrix)
+	dp := matrix[length-1]
 
-	min := math.MaxInt32
-
-	for i := 0; i < len(matrix); i++ {
-		tmpMin := matrix[0][i] // 从第一行第i个元素开始累加
-		flg := i
-		for j := 1; j < len(matrix); j++ {
-			ttm := 0
-			if flg >= 1 && flg <= len(matrix)-2 {
-				ttm = min_931(matrix[j][flg-1], min_931(matrix[j][flg], matrix[j][flg+1]))
-				if ttm == matrix[j][flg-1] {
-					flg = flg - 1
-				} else if ttm == matrix[j][flg+1] {
-					flg = flg + 1
-				}
-			} else if flg == 0 {
-				ttm = min_931(matrix[j][flg+1], matrix[j][flg])
-				if ttm == matrix[j][flg+1] {
-					flg = flg + 1
-				}
-			} else if flg == len(matrix)-1 {
-				ttm = min_931(matrix[j][flg-1], matrix[j][flg])
-				if ttm == matrix[j][flg-1] {
-					flg = flg - 1
-				}
+	// 从倒数第二层开始遍历往上
+	for i := length - 2; i >= 0; i-- {
+		tmp := make([]int, length)
+		for j := 0; j < length; j++ {
+			if j >= 1 && j <= length-2 {
+				tmp[j] = min_931(matrix[i][j]+dp[j], min_931(matrix[i][j]+dp[j+1], matrix[i][j]+dp[j-1]))
+			} else if j == 0 {
+				tmp[j] = min_931(matrix[i][j]+dp[j+1], matrix[i][j]+dp[j])
+			} else {
+				tmp[j] = min_931(matrix[i][j]+dp[j-1], matrix[i][j]+dp[j])
 			}
-			tmpMin += ttm
 		}
+		dp = tmp
+	}
 
-		if tmpMin < min {
-			min = tmpMin
+	for _, v := range dp {
+		if min > v {
+			min = v
 		}
 	}
 
