@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
  * @lc app=leetcode.cn id=1314 lang=golang
  *
@@ -48,6 +46,6 @@ func matrixBlockSum(mat [][]int, k int) [][]int {
 
 // @lc code=end
 
-func main() {
-	fmt.Println(matrixBlockSum([][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, 1))
-}
+// func main() {
+// 	fmt.Println(matrixBlockSum([][]int{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, 1))
+// }
