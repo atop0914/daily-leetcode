@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 /*
  * @lc app=leetcode.cn id=63 lang=golang
  *
@@ -40,6 +38,6 @@ func uniquePathsWithObstacles(obstacleGrid [][]int) int {
 
 // @lc code=end
 
-func main() {
-	fmt.Println(uniquePathsWithObstacles([][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}))
-}
+// func main() {
+// 	fmt.Println(uniquePathsWithObstacles([][]int{{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}))
+// }
