@@ -17,7 +17,7 @@ type RandomizedCollection struct {
 	contentArray []int
 }
 
-func Constructor() RandomizedCollection {
+func Constructor_381() RandomizedCollection {
 	return RandomizedCollection{
 		contentSet:   make(map[int]map[int]struct{}),
 		contentArray: make([]int, 0),
