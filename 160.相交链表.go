@@ -6,10 +6,10 @@ package main
  * [160] 相交链表
  */
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+// type ListNode struct {
+// 	Val  int
+// 	Next *ListNode
+// }
 
 // @lc code=start
 /**

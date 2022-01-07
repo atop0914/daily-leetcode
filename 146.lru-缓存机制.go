@@ -1,11 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"math"
-	"time"
-)
-
 /*
  * @lc app=leetcode.cn id=146 lang=golang
  *
@@ -14,50 +8,88 @@ import (
 
 // @lc code=start
 type LRUCache struct {
-	cap int
-	m   map[int]int   // 存放 k v 数据
-	hot map[int]int64 // 存放 k times 数据
+	size       int
+	capacity   int
+	cache      map[int]*DLinkedNode
+	head, tail *DLinkedNode
+}
+
+type DLinkedNode struct {
+	key, value int
+	prev, next *DLinkedNode
+}
+
+func initDLinkedNode(key, value int) *DLinkedNode {
+	return &DLinkedNode{
+		key:   key,
+		value: value,
+	}
 }
 
 func Constructor(capacity int) LRUCache {
-
-	return LRUCache{
-		cap: capacity,
-		m:   make(map[int]int, capacity),
-		hot: make(map[int]int64, capacity),
+	l := LRUCache{
+		cache:    map[int]*DLinkedNode{},
+		head:     initDLinkedNode(0, 0),
+		tail:     initDLinkedNode(0, 0),
+		capacity: capacity,
 	}
+
+	l.head.next = l.tail
+	l.tail.prev = l.head
+
+	return l
 }
 
 func (this *LRUCache) Get(key int) int {
 
-	if value, ok := this.m[key]; ok {
-		this.hot[key] = time.Now().Unix()
-		return value
+	if _, ok := this.cache[key]; !ok {
+		return -1
 	}
 
-	return -1
+	node := this.cache[key]
+	this.moveToHead(node)
+	return node.value
 }
 
 func (this *LRUCache) Put(key int, value int) {
-
-	if _, ok := this.m[key]; ok {
-		this.m[key] = value
-	} else {
-		if len(this.m) == this.cap { // 需要扩容
-			min := int64(math.MaxInt64)
-			kmin := -1
-			for k, v := range this.hot {
-				if v < min {
-					min = v
-					kmin = k
-				}
-			}
-			delete(this.m, kmin)
-			delete(this.hot, kmin)
+	if _, ok := this.cache[key]; !ok {
+		node := initDLinkedNode(key, value)
+		this.cache[key] = node
+		this.addToHead(node)
+		this.size++
+		if this.size > this.capacity {
+			removed := this.removeTail()
+			delete(this.cache, removed.key)
+			this.size--
 		}
-		this.m[key] = value
+	} else {
+		node := this.cache[key]
+		node.value = value
+		this.moveToHead(node)
 	}
-	this.hot[key] = time.Now().Unix()
+}
+
+func (this *LRUCache) addToHead(node *DLinkedNode) {
+	node.prev = this.head
+	node.next = this.head.next
+	this.head.next.prev = node
+	this.head.next = node
+}
+
+func (this *LRUCache) removeNode(node *DLinkedNode) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
+}
+
+func (this *LRUCache) moveToHead(node *DLinkedNode) {
+	this.removeNode(node)
+	this.addToHead(node)
+}
+
+func (this *LRUCache) removeTail() *DLinkedNode {
+	node := this.tail.prev
+	this.removeNode(node)
+	return node
 }
 
 /**
@@ -67,16 +99,3 @@ func (this *LRUCache) Put(key int, value int) {
  * obj.Put(key,value);
  */
 // @lc code=end
-
-func main() {
-	cache := Constructor(2)
-	cache.Put(1, 1)
-	cache.Put(2, 2)
-	fmt.Println(cache.Get(1))
-	cache.Put(3, 3)
-	fmt.Println(cache.Get(2))
-	cache.Put(4, 4)
-	fmt.Println(cache.Get(1))
-	fmt.Println(cache.Get(3))
-	fmt.Println(cache.Get(4))
-}
