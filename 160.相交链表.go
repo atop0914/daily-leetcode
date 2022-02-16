@@ -21,8 +21,23 @@ package main
  */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 
-	p1, p2 := headA, headB
+	// m1 := make(map[*ListNode]bool)
 
+	// for headA != nil {
+	// 	m1[headA] = true
+	// 	headA = headA.Next
+	// }
+
+	// for headB != nil {
+	// 	if m1[headB] == true {
+	// 		return headB
+	// 	}
+	// 	headB = headB.Next
+	// }
+
+	// return nil
+
+	p1, p2 := headA, headB
 	for p1 != p2 {
 		if p1 == nil {
 			p1 = headB
@@ -35,8 +50,8 @@ func getIntersectionNode(headA, headB *ListNode) *ListNode {
 		} else {
 			p2 = p2.Next
 		}
-	}
 
+	}
 	return p1
 }
 

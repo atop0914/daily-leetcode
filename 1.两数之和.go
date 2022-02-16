@@ -8,20 +8,17 @@ package main
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
-	path := make([]int, 0)
-	set := make(map[int]int) // 已遍历的数组将位置保存与set集合中
+	m := make(map[int]int)
 
 	for index, value := range nums {
-		// 每次遍历都去map中查找有没有匹配元素 如果有的话就直接退出 没有的话把元素存放于map中
-		if val, ok := set[target-value]; ok {
-			path = append(path, []int{val, index}...)
-			break
+		if i, ok := m[target-value]; ok {
+			return []int{index, i}
 		} else {
-			set[value] = index
+			m[value] = index
 		}
 	}
 
-	return path
+	return []int{}
 }
 
 // @lc code=end

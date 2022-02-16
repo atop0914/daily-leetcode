@@ -21,34 +21,29 @@ type ListNode struct {
  */
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 
-	l := new(ListNode)
+	list3 := new(ListNode) // 新链表的头结点
+	p3 := list3            // 指针指向头结点
 
-	p1 := list1
-	p2 := list2
-	p := l
-
-	for p1 != nil && p2 != nil {
-
-		if p1.Val < p2.Val {
-			p.Next = p1
-			p1 = p1.Next
+	for list1 != nil && list2 != nil {
+		if list1.Val <= list2.Val {
+			p3.Next = list1
+			list1 = list1.Next
 		} else {
-			p.Next = p2
-			p2 = p2.Next
+			p3.Next = list2
+			list2 = list2.Next
 		}
-
-		p = p.Next
+		p3 = p3.Next
 	}
 
-	if p1 != nil {
-		p.Next = p1
+	if list1 != nil {
+		p3.Next = list1
 	}
 
-	if p2 != nil {
-		p.Next = p2
+	if list2 != nil {
+		p3.Next = list2
 	}
 
-	return l.Next
+	return list3.Next
 }
 
 // @lc code=end
